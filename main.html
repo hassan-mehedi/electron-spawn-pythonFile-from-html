@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Main</title>
+    </head>
+    <body>
+        <h1>I am main process</h1>
+        <form>
+            <input type="number" name="number" id="number" />
+            <input type="submit" value="Submit" />
+        </form>
+        <p style="display: none">
+            The factorial of <span id="input-digit"></span> is <span id="factorial-digit"></span>
+        </p>
+        <script>
+            const { PythonShell } = require("python-shell");
+            const electron = require("electron");
+            const { ipcRenderer } = electron;
+            const path = require("path");
+
+            const form = document.querySelector("form");
+            const p = document.querySelector("p");
+
+            form.addEventListener("submit", function (event) {
+                event.preventDefault();
+
+                const num = document.querySelector("#number").value;
+                let pyshell = new PythonShell(path.join(__dirname, "/factorial.py"), {
+                    pythonPath: "python3",
+                    args: [num],
+                });
+
+                pyshell.on("message", function (results) {
+                    console.log(results);
+                    p.style.display = "block";
+                    document.querySelector("#input-digit").innerHTML = num;
+                    document.querySelector("#factorial-digit").innerHTML = results;
+                });
+            });
+        </script>
+    </body>
+</html>

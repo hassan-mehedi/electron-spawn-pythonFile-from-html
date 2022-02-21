@@ -1,0 +1,17 @@
+{
+    "name": "electron_process",
+    "version": "1.0.0",
+    "description": "Testing if electron can run multiple windows and child processes",
+    "main": "main.js",
+    "scripts": {
+        "start": "electron ."
+    },
+    "author": "Md. Mehedi Hassan",
+    "license": "ISC",
+    "dependencies": {
+        "python-shell": "^3.0.1"
+    },
+    "devDependencies": {
+        "electron": "^17.0.1"
+    }
+}
