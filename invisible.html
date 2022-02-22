@@ -1,0 +1,14 @@
+<script>
+    const { PythonShell } = require("python-shell");
+    const electron = require("electron");
+    const { ipcRenderer } = electron;
+    const path = require("path");
+
+    let pyshell = new PythonShell(path.join(__dirname, "/rand.py"), {
+        pythonPath: "python3",
+    });
+
+    pyshell.on("message", function (results) {
+        ipcRenderer.send("random-number", results);
+    });
+</script>

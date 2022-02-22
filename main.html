@@ -12,6 +12,10 @@
         <p style="display: none">
             The factorial of <span id="input-digit"></span> is <span id="factorial-digit"></span>
         </p>
+
+        <!-- Generate Random Number -->
+        <button id="rand">Random Number</button>
+        <div id="random-number"></div>
         <script>
             const { PythonShell } = require("python-shell");
             const electron = require("electron");
@@ -20,6 +24,7 @@
 
             const form = document.querySelector("form");
             const p = document.querySelector("p");
+            const randButton = document.querySelector("#rand");
 
             form.addEventListener("submit", function (event) {
                 event.preventDefault();
@@ -36,6 +41,14 @@
                     document.querySelector("#input-digit").innerHTML = num;
                     document.querySelector("#factorial-digit").innerHTML = results;
                 });
+            });
+
+            rand.addEventListener("click", function () {
+                ipcRenderer.send("generate-random-number");
+            });
+
+            ipcRenderer.on("random-number", function (event, number) {
+                document.querySelector("#random-number").innerHTML = number;
             });
         </script>
     </body>
