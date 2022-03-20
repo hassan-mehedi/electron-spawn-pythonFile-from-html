@@ -5,7 +5,7 @@
     const path = require("path");
 
     let pyshell = new PythonShell(path.join(__dirname, "/rand.py"), {
-        pythonPath: "python3",
+        pythonPath: "python",
     });
 
     pyshell.on("message", function (results) {

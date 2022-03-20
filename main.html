@@ -6,11 +6,11 @@
     <body>
         <h1>I am main process</h1>
         <form>
-            <input type="number" name="number" id="number" />
+            <input type="text" name="text" id="text" />
             <input type="submit" value="Submit" />
         </form>
         <p style="display: none">
-            The factorial of <span id="input-digit"></span> is <span id="factorial-digit"></span>
+            Detected language of <span id="input-digit"></span> is: <span id="factorial-digit"></span>
         </p>
 
         <!-- Generate Random Number -->
@@ -29,16 +29,16 @@
             form.addEventListener("submit", function (event) {
                 event.preventDefault();
 
-                const num = document.querySelector("#number").value;
+                const textVal = document.querySelector("#text").value;
                 let pyshell = new PythonShell(path.join(__dirname, "/factorial.py"), {
-                    pythonPath: "python3",
-                    args: [num],
+                    pythonPath: "python",
+                    args: [textVal],
                 });
 
                 pyshell.on("message", function (results) {
                     console.log(results);
                     p.style.display = "block";
-                    document.querySelector("#input-digit").innerHTML = num;
+                    document.querySelector("#input-digit").innerHTML = textVal;
                     document.querySelector("#factorial-digit").innerHTML = results;
                 });
             });

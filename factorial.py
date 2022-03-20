@@ -1,11 +1,9 @@
 import sys
+import numpy as np
+import json
+from langdetect import detect, DetectorFactory
 
 data = sys.argv[1]
 
-def hello_world(x):
-    if x == 1:
-        return 1
-    else:
-        return x * hello_world(x - 1)
-
-print(hello_world( int(data) ))
+DetectorFactory.seed = 0
+print((detect(data)))
